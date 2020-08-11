@@ -2,5 +2,48 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "meta-man": {
+      "projectType": "library",
+      "root": "projects/meta-man",
+      "sourceRoot": "projects/meta-man/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/meta-man/tsconfig.lib.json",
+            "project": "projects/meta-man/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/meta-man/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/meta-man/src/test.ts",
+            "tsConfig": "projects/meta-man/tsconfig.spec.json",
+            "karmaConfig": "projects/meta-man/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/meta-man/tsconfig.lib.json",
+              "projects/meta-man/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "196b66c8-c2d3-4295-8115-72ec9acfc989"
+  },
+  "defaultProject": "meta-man"
 }
