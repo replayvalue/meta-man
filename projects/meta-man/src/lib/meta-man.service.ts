@@ -49,9 +49,12 @@ export class MetaManService {
     }
     if (this.config.host) {
       const host = this.config.host;
-      this.fetchTag({
-        property: "og:url",
-      }).content = `${host}${this.router.routerState.snapshot.url}`;
+      this.setTag(
+        {
+          property: "og:url",
+        },
+        `${host}${this.router.routerState.snapshot.url}`
+      );
     }
   }
 
@@ -61,7 +64,7 @@ export class MetaManService {
       this.title.setTitle(
         `${title}${baseTitle ? " | " : ""}${baseTitle ?? ""}`
       );
-      this.fetchTag({ property: "og:title" }).content = title;
+      this.setTag({ property: "og:title" }, title);
     } else if (title === null) {
       this.meta.removeTag("property=og:title");
     }
@@ -69,8 +72,8 @@ export class MetaManService {
 
   private handleDescription(description: string | null | undefined): void {
     if (description) {
-      this.fetchTag({ name: "description" }).content = description;
-      this.fetchTag({ property: "og:description" }).content = description;
+      this.setTag({ name: "description" }, description);
+      this.setTag({ property: "og:description" }, description);
     } else if (description === null) {
       this.meta.removeTag("name=description");
       this.meta.removeTag("property=og:description");
@@ -79,7 +82,7 @@ export class MetaManService {
 
   private handleImage(image: string | null | undefined): void {
     if (image) {
-      this.fetchTag({ property: "og:image" }).content = image;
+      this.setTag({ property: "og:image" }, image);
     } else if (image === null) {
       this.meta.removeTag("property=og:image");
     }
@@ -91,14 +94,23 @@ export class MetaManService {
   ): void {
     const imageToUse = twitterImage ?? image;
     if (imageToUse) {
-      this.fetchTag({ name: "twitter:image" }).content = imageToUse;
+      this.setTag({ name: "twitter:image" }, imageToUse);
     } else {
       this.meta.removeTag("name=twitter:image");
     }
   }
 
-  private fetchTag(tag: MetaDefinition): HTMLMetaElement {
-    return this.meta.addTag(tag) as HTMLMetaElement;
+  /**
+   * Ensures tag exists and updates with appropriate value.
+   */
+  private setTag(tag: MetaDefinition, content: string): void {
+    const { name, property } = tag;
+    this.meta.addTag(tag);
+    this.meta.updateTag({
+      ...(name && { name }),
+      ...(property && { property }),
+      content,
+    });
   }
 
   private resolveMetadata(route: ActivatedRoute): MetaData {
