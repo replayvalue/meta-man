@@ -1,6 +1,6 @@
 # MetaMan
 
-MetaMan is short for _Metadata Manager_, and is a simple library to help keep the header tags in your Angular application in sync with the current route state.
+MetaMan is short for _Metatag Manager_, and is a simple library to help keep the header tags in your Angular application in sync with the current route state.
 
 ## Installation
 
