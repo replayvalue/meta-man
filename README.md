@@ -1,27 +1,79 @@
-# NgxMetaman
+# MetaMan
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
+MetaMan is short for _Metadata Manager_, and is a simple library to help keep the header tags in your Angular application in sync with the current route state.
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+npm install --save @replayvalue/meta-man
+```
 
-## Code scaffolding
+## Usage
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Module
 
-## Build
+The `MetaManModule` must be added to your `AppModule` and configured with the `forRoot` method:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```typescript
+import { MetaManModule } from "@replayvalue/meta-man";
 
-## Running unit tests
+@NgModule({
+  imports: [
+    // In order for MetaMan to work most effectively, paramsInheritance strategy can
+    // be set to 'always' for RouterModule. This allows you do reduce title and description
+    // duplication for routes that share values.
+    RouterModule.forRoot(routes, { paramsInheritanceStrategy: "always" }),
+    MetaManModule.forRoot({
+      baseTitle: "Replay Value",
+      host: "https://getreplayvalue.com",
+      includeTwitter: true,
+    }),
+  ],
+})
+export class AppModule {}
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The supported configuration parameters are:
 
-## Running end-to-end tests
+| Property       | Requirement | Description                                                                                                                     |
+| -------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| baseTitle      | Optional    | An optional fixed portion of the browser title, usually the website name. Will be separated from the `title` by a vertical bar. |
+| host           | Optional    | The host used to build canonical urls. Required for `og:image` tags.                                                            |
+| includeTwitter | Optional    | Boolean indicating whether or not to include twitter specfic tags.                                                              |
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Component
 
-## Further help
+To listen to route changes and update meta tags, you must called `MetaManService.listenForRouteChanges` in your AppComponent.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```typescript
+import { MetaManService } from "@replayvalue/meta-man";
+
+export class AppComponent implements OnInit {
+  private _album: Array = [];
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly metaManService: MetaManService
+  ) {}
+
+  ngOnInit(): void {
+    this.metaManService.listenForRouteChanges(this.route);
+  }
+}
+```
+
+## How does it work?
+
+MetaMan will listen to the routing events from the Angular `Router`, and on the `NavigationEnd` event, it
+pulls title and metatag properties from the current `ActivatedRouteSnapshot.data`, and updates the title
+and metatags of your application. Below is the mapping of `ActivatedRouteSnapshot.data` properties to metatags.
+
+| Property     | MetaTags                                                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| title        | `<title>`, `<meta property="og:title">`.                                                                                  |
+| description  | `<meta name="description">`, `<meta property="og:description">`.                                                          |
+| image        | `<meta property="og:image">`, `<meta name="twitter:image">` if `includeTwitter` is `true` and no `twitterImage` property. |
+| twitterImage | `<meta name="twitter:image">` if `includeTwitter` is `true`.                                                              |
+
+## License
+
+MIT
