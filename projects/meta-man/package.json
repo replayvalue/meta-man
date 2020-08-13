@@ -1,6 +1,6 @@
 {
   "name": "@replayvalue/meta-man",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Metatag manager for Angular applications",
   "publishConfig": {
     "access": "public"
