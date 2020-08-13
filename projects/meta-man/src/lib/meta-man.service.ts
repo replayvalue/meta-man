@@ -60,14 +60,13 @@ export class MetaManService {
 
   private handleTitle(title: string | null | undefined): void {
     if (title) {
-      const baseTitle = this.config.baseTitle;
-      this.title.setTitle(
-        `${title}${baseTitle ? " | " : ""}${baseTitle ?? ""}`
-      );
       this.setTag({ property: "og:title" }, title);
     } else if (title === null) {
       this.meta.removeTag("property=og:title");
     }
+    const htmlTitle =
+      [title, this.config.baseTitle].filter(it => !!it).join(" | ") ?? "";
+    this.title.setTitle(htmlTitle);
   }
 
   private handleDescription(description: string | null | undefined): void {
