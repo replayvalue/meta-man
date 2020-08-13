@@ -1,24 +1,24 @@
-# NgxMetaman
+# MetaMan
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
 
 ## Code scaffolding
 
-Run `ng generate component component-name --project ngx-metaman` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-metaman`.
+Run `ng generate component component-name --project meta-man` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project meta-man`.
 
-> Note: Don't forget to add `--project ngx-metaman` or else it will be added to the default project in your `angular.json` file.
+> Note: Don't forget to add `--project meta-man` or else it will be added to the default project in your `angular.json` file.
 
 ## Build
 
-Run `ng build ngx-metaman` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `ng build meta-man` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Publishing
 
-After building your library with `ng build ngx-metaman`, go to the dist folder `cd dist/ngx-metaman` and run `npm publish`.
+After building your library with `ng build meta-man`, go to the dist folder `cd dist/meta-man` and run `npm publish`.
 
 ## Running unit tests
 
-Run `ng test ngx-metaman` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng test meta-man` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Further help
 

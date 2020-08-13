@@ -40,12 +40,12 @@ export class MetaManService {
       .subscribe(this.routeEventObserver(route));
   }
 
-  setMetaTags({ title, description, image, twitterImage }: MetaData): void {
+  setMetaTags({ title, description, image, twitter }: MetaData): void {
     this.handleTitle(title);
     this.handleDescription(description);
     this.handleImage(image);
     if (this.config.includeTwitter) {
-      this.handleTwitter(image, twitterImage);
+      this.handleTwitter(image, twitter?.image);
     }
     if (this.config.host) {
       const host = this.config.host;

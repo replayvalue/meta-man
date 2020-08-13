@@ -67,12 +67,12 @@ MetaMan will listen to the routing events from the Angular `Router`, and on the 
 pulls title and metatag properties from the current `ActivatedRouteSnapshot.data`, and updates the title
 and metatags of your application. Below is the mapping of `ActivatedRouteSnapshot.data` properties to metatags.
 
-| Property     | MetaTags                                                                                                                  |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| title        | `<title>`, `<meta property="og:title">`.                                                                                  |
-| description  | `<meta name="description">`, `<meta property="og:description">`.                                                          |
-| image        | `<meta property="og:image">`, `<meta name="twitter:image">` if `includeTwitter` is `true` and no `twitterImage` property. |
-| twitterImage | `<meta name="twitter:image">` if `includeTwitter` is `true`.                                                              |
+| Property      | MetaTags                                                                                                                   |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| title         | `<title>`, `<meta property="og:title">`.                                                                                   |
+| description   | `<meta name="description">`, `<meta property="og:description">`.                                                           |
+| image         | `<meta property="og:image">`, `<meta name="twitter:image">` if `includeTwitter` is `true` and no `twitter.image` property. |
+| twitter.image | `<meta name="twitter:image">` if `includeTwitter` is `true`.                                                               |
 
 ## License
 
