@@ -62,7 +62,7 @@ export class MetaManService {
     if (title) {
       this.setTag({ property: "og:title" }, title);
     } else if (title === null) {
-      this.meta.removeTag("property=og:title");
+      this.meta.removeTag("property='og:title'");
     }
     const htmlTitle =
       [title, this.config.baseTitle].filter(it => !!it).join(" | ") ?? "";
@@ -75,7 +75,7 @@ export class MetaManService {
       this.setTag({ property: "og:description" }, description);
     } else if (description === null) {
       this.meta.removeTag("name=description");
-      this.meta.removeTag("property=og:description");
+      this.meta.removeTag("property='og:description'");
     }
   }
 
@@ -83,7 +83,7 @@ export class MetaManService {
     if (image) {
       this.setTag({ property: "og:image" }, image);
     } else if (image === null) {
-      this.meta.removeTag("property=og:image");
+      this.meta.removeTag("property='og:image'");
     }
   }
 
@@ -95,7 +95,7 @@ export class MetaManService {
     if (imageToUse) {
       this.setTag({ name: "twitter:image" }, imageToUse);
     } else {
-      this.meta.removeTag("name=twitter:image");
+      this.meta.removeTag("name='twitter:image'");
     }
   }
 

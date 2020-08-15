@@ -118,14 +118,16 @@ describe("MetaManService", () => {
             return router.navigate(["other"]);
           })
           .then(() => {
-            expect(spyMeta.removeTag).toHaveBeenCalledWith("property=og:image");
+            expect(spyMeta.removeTag).toHaveBeenCalledWith(
+              "property='og:image'"
+            );
             resetSpys();
             return router.navigate(["another"]);
           })
           .then(() => {
             expect(spyMeta.removeTag).toHaveBeenCalledWith("name=description");
             expect(spyMeta.removeTag).toHaveBeenCalledWith(
-              "property=og:description"
+              "property='og:description'"
             );
             resetSpys();
           })
