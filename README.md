@@ -8,6 +8,10 @@ MetaMan is short for _Metatag Manager_, and is a simple library to help keep the
 npm install --save @replayvalue/meta-man
 ```
 
+## Compatibility
+
+Use version ^0.1.0 for Angular 10 and >=0.2.0 for Angular 11+.
+
 ## Usage
 
 ### Module
